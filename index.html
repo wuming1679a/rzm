@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字母名言</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .value {
+            position: fixed;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            z-index: 1000;
+            transition: transform 1s ease, opacity 1s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="output"></div>
+
+    <script>
+        const coreValues = [
+            "字母:?","字母:你","字母:好","字母:你","字母:好","字母:你","字母:好","字母:你","字母:好","字母:你","字母:12句"
+        ];
+
+        function showCoreValues(x, y) {
+            const valueDiv = document.createElement('div');
+            valueDiv.className = 'value';
+            
+            // 随机选择一个索引
+            const randomIndex = Math.floor(Math.random() * coreValues.length);
+            valueDiv.innerText = coreValues[randomIndex]; // 显示随机选择的词
+
+            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            valueDiv.style.backgroundColor = randomColor;
+
+            valueDiv.style.left = (x + 10) + 'px';
+            valueDiv.style.top = (y + 10) + 'px';
+
+            document.body.appendChild(valueDiv);
+
+            // 淡出和上移效果
+            setTimeout(() => {
+                valueDiv.style.transform = 'translateY(-30px)';
+                valueDiv.style.opacity = 0;
+                valueDiv.addEventListener('transitionend', () => {
+                    document.body.removeChild(valueDiv);
+                });
+            }, 100);
+        }
+
+        document.addEventListener('click', (event) => {
+            showCoreValues(event.pageX, event.pageY);
+        });
+    </script>
+</body>
+
+</html>
